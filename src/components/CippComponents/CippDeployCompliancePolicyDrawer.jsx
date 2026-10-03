@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { CippIcons } from "../../utils/icon-registry";
 import { Button, Divider, Stack } from "@mui/material";
 import { Grid } from "@mui/system";
 import { useForm, useFormState, useWatch } from "react-hook-form";
-import { RocketLaunch } from "@mui/icons-material";
 import { CippOffCanvas } from "./CippOffCanvas";
 import CippFormComponent from "./CippFormComponent";
 import { CippFormTenantSelector } from "./CippFormTenantSelector";
@@ -218,9 +218,9 @@ export const CippDeployCompliancePolicyDrawer = ({
   return (
     <>
       <PermissionButton
-        requiredPermissions={requiredPermissions}
+        {...(PermissionButton !== Button ? { requiredPermissions } : {})}
         onClick={() => setDrawerVisible(true)}
-        startIcon={<RocketLaunch />}
+        startIcon={<CippIcons.RocketLaunch />}
       >
         {buttonText ?? config.buttonLabel}
       </PermissionButton>
@@ -230,7 +230,9 @@ export const CippDeployCompliancePolicyDrawer = ({
         onClose={handleCloseDrawer}
         size="lg"
         footer={
-          <Stack direction="row" spacing={2} justifyContent="flex-start">
+          <Stack direction="row" spacing={2} sx={{
+            justifyContent: "flex-start"
+          }}>
             <Button
               variant="contained"
               color="primary"
@@ -290,7 +292,7 @@ export const CippDeployCompliancePolicyDrawer = ({
                 label="Label Color (optional)"
                 name="labelColor"
                 formControl={formControl}
-                helperText="Custom label color, applied via the 'color' advanced setting. The compliance portal only offers preset colors; this supports any hex color. Leave empty to keep the color from the JSON below."
+                helperText="Custom label color, applied via the 'color' advanced setting. The Purview portal only offers preset colors; this supports any hex color. Leave empty to keep the color from the JSON below."
               />
             </Grid>
           )}
